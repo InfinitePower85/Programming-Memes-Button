@@ -1,8 +1,8 @@
-const dog_btn = document.getElementById('jokeButton');
-const dog_result = document.getElementById('jokeResult');
-console.log(dog_result);
-console.log(dog_btn);
-dog_btn.addEventListener('click', getRandomJoke);
+const joke_btn = document.getElementById('jokeButton');
+const joke_result = document.getElementById('jokeResult');
+console.log(joke_result);
+console.log(joke_btn);
+joke_btn.addEventListener('click', getRandomJoke);
 
 const garbage_btn = document.getElementById('g_button');
 const ok_button = document.getElementById('ok_button');
@@ -13,13 +13,7 @@ let dt_btn = null;
 garbage_btn.addEventListener('click', rateDown);
 ok_button.addEventListener('click', rateUp);
 
-/*async function dogButton() {
-  for (let i = 0; i < dog_results.length; i++) {
-    const urll = await getRandomDog();
-    console.log(urll + " this is the url");
-    dog_results[i].innerHTML = `<img src=${urll} alt="dog"/>`;
-  }
-}*/
+
 
 function rateDown() {
     console.log("That joke was garbage");
@@ -71,7 +65,7 @@ async function getRandomJoke() {
         fetched = true;
     }
 
-    dog_result.innerHTML = `<img src=${data[number].image} alt="imageHere">`;
+    joke_result.innerHTML = `<img src=${data[number].image} alt="imageHere">`;
     number += 1;
     number = number % 12;
     /*response.then((res) => res.json())
