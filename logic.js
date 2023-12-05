@@ -1,7 +1,5 @@
 const joke_btn = document.getElementById('jokeButton');
 const joke_result = document.getElementById('jokeResult');
-console.log(joke_result);
-console.log(joke_btn);
 joke_btn.addEventListener('click', getRandomJoke);
 
 const garbage_btn = document.getElementById('g_button');
@@ -17,8 +15,10 @@ ok_button.addEventListener('click', rateUp);
 
 function rateDown() {
     console.log("That joke was garbage");
-    rating.innerHTML = `<p> There goes 5 seconds you won't get back! </p>
-                        <button class = "dt" id="dt_btn"> Send Death Threats </button>
+    rating.innerHTML = `<p> There goes 5 seconds of your life that you won't get back. While you could have been looking at a good meme,
+                       or better yet, watching paint dry, instead you were forced to look upon this meme. Anger and rage builds up 
+                       inside of you; this "meme" hast offended your eyes. </p>
+                        <button class = "dt" id="dt_btn"> Let them know exactly how you feel  </button>
                         <div id="death_counter"></div>`;
     dt_btn = document.getElementById('dt_btn');
     console.log(dt_btn);
@@ -26,6 +26,8 @@ function rateDown() {
 }
 
 dt_ctr = 0;
+numConfetti = 5;
+extra_message = "";
 function sendDT() {
     dt_ctr += 1;
     console.log("you have sent dt");
@@ -33,8 +35,20 @@ function sendDT() {
     if (dt_ctr == 1) {
         s = '';
     }
-
-    document.getElementById('death_counter').innerHTML = `<p> You have sent ${dt_ctr} death threat${s}`;
+    if (dt_ctr > 0 && dt_ctr % 20 == 0) {
+      extra_message = `${dt_ctr} death threat milestone!`;
+      for (i = 0; i < numConfetti; i++)
+      {
+        confetti({
+          particleCount: 100,
+          spread: 300,
+          startVelocity: 20,
+          scalar: 0.9,
+          ticks: 180
+        });
+      }
+    }
+    document.getElementById('death_counter').innerHTML = `<p> You have sent ${dt_ctr} death threat${s}</p> <br> <p> ${extra_message}</p>`;
 }
 
 function rateUp() {
@@ -68,23 +82,6 @@ async function getRandomJoke() {
     joke_result.innerHTML = `<img src=${data[number].image} alt="imageHere">`;
     number += 1;
     number = number % 12;
-    /*response.then((res) => res.json())
-    .then((data) => {
-        console.log("debug");
-        console.log(data.image);
-        dog_result.innerHTML = `<img src=${data.image} alt="imageHere/>`;
-    });*/
-  /*fetch('https://random.dog/woof.json')
-    .then(res => res.json())
-    .then(data => {
-        console.log(`${data.url}`)
-        if(data.url.includes('.mp4')) {
-            return getRandomDog();
-        } else {
-            
-          return data.url;
-        }
-  })*/
   return "No data fetched yet";
 }
 console.log("hello world")
